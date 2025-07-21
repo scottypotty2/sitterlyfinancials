@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function ContactSection() {
   return (
     <section className="py-16 px-4 flex flex-col items-center" id="contact">
