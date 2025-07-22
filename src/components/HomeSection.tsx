@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from '@tanstack/react-router'
 
 const dropdowns = [
   {
@@ -74,7 +75,7 @@ export default function HomeSection() {
           <p className="text-lg md:text-xl text-center mb-6">
             We offer customized subscription plans to suit your business needs—choose the services and support that fit your goals and budget.
           </p>
-          <a href="/contact" className="px-8 py-3 bg-[#232526] text-[#00fff7] font-bold rounded-lg shadow-lg cyberpunk-btn hover:bg-[#00fff7] hover:text-[#232526] transition mb-8">Contact Us</a>
+          <Link to="/contact" className="px-8 py-3 bg-[#232526] text-[#00fff7] font-bold rounded-lg shadow-lg cyberpunk-btn hover:bg-[#00fff7] hover:text-[#232526] transition mb-8">Contact Us</Link>
         </div>
         <div className="w-full max-w-2xl space-y-4 mb-8 z-20">
           {dropdowns.map((item, idx) => (
