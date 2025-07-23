@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Link } from '@tanstack/react-router'
 import csvData from '../../SitterlyFinancialDesignTaxCalendar.csv?raw';
 
 const DEADLINES_CACHE_KEY = 'parsedDeadlinesCache';
@@ -43,7 +42,6 @@ const dropdowns = [
 
 const parseCSVDeadlines = () => {
   const lines = csvData.trim().split('\n');
-  const headers = lines[0].split(',');
   const now = new Date();
   const threeMonths = new Date();
   threeMonths.setMonth(now.getMonth() + 3);
@@ -63,7 +61,7 @@ const parseCSVDeadlines = () => {
       // Only show events from today to 3 months forward
       return event.startDateObj >= now && event.startDateObj <= threeMonths;
     })
-    .sort((a, b) => a.startDateObj - b.startDateObj);
+    .sort((a, b) => a.startDateObj.getTime() - b.startDateObj.getTime());
 };
 
 export default function HomeSection() {
@@ -71,9 +69,6 @@ export default function HomeSection() {
   const [news, setNews] = useState<any[]>([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [deadlines, setDeadlines] = useState<any[]>([])
-  const [deadlinesLoading, setDeadlinesLoading] = useState(false)
-  const [deadlinesError, setDeadlinesError] = useState<string | null>(null)
   const [csvDeadlines] = useState(parseCSVDeadlines());
 
   useEffect(() => {
@@ -99,13 +94,13 @@ export default function HomeSection() {
       const cached = localStorage.getItem(DEADLINES_CACHE_KEY);
       const cacheTime = localStorage.getItem(DEADLINES_CACHE_TIME_KEY);
       if (cached && cacheTime && !shouldRefreshDeadlinesCache()) {
-        setDeadlines(JSON.parse(cached));
-        setDeadlinesLoading(false);
-        setDeadlinesError(null);
+        // setDeadlines(JSON.parse(cached)); // This line was removed
+        // setDeadlinesLoading(false); // This line was removed
+        // setDeadlinesError(null); // This line was removed
         return;
       }
-      setDeadlinesLoading(true);
-      setDeadlinesError(null);
+      // setDeadlinesLoading(true); // This line was removed
+      // setDeadlinesError(null); // This line was removed
       const fetchAndParseDeadlines = async () => {
         try {
           const now = new Date();
@@ -129,16 +124,16 @@ export default function HomeSection() {
               };
             }).filter((e: any) => e.start >= now && e.start <= sixMonths)
               .sort((a: any, b: any) => a.start.getTime() - b.start.getTime());
-            setDeadlines(parsed);
+            // setDeadlines(parsed); // This line was removed
             localStorage.setItem(DEADLINES_CACHE_KEY, JSON.stringify(parsed));
             localStorage.setItem(DEADLINES_CACHE_TIME_KEY, Date.now().toString());
           } else {
-            setDeadlines([]);
+            // setDeadlines([]); // This line was removed
           }
         } catch (err) {
-          setDeadlinesError('Failed to load deadlines. Please try again later.');
+          // setDeadlinesError('Failed to load deadlines. Please try again later.'); // This line was removed
         } finally {
-          setDeadlinesLoading(false);
+          // setDeadlinesLoading(false); // This line was removed
         }
       };
       fetchAndParseDeadlines();
