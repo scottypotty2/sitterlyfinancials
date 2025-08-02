@@ -104,13 +104,8 @@ export default function HomeSection() {
       const cached = localStorage.getItem(DEADLINES_CACHE_KEY);
       const cacheTime = localStorage.getItem(DEADLINES_CACHE_TIME_KEY);
       if (cached && cacheTime && !shouldRefreshDeadlinesCache()) {
-        // setDeadlines(JSON.parse(cached)); // This line was removed
-        // setDeadlinesLoading(false); // This line was removed
-        // setDeadlinesError(null); // This line was removed
         return;
       }
-      // setDeadlinesLoading(true); // This line was removed
-      // setDeadlinesError(null); // This line was removed
       const fetchAndParseDeadlines = async () => {
         try {
           const now = new Date();
@@ -134,16 +129,11 @@ export default function HomeSection() {
               };
             }).filter((e: any) => e.start >= now && e.start <= sixMonths)
               .sort((a: any, b: any) => a.start.getTime() - b.start.getTime());
-            // setDeadlines(parsed); // This line was removed
             localStorage.setItem(DEADLINES_CACHE_KEY, JSON.stringify(parsed));
             localStorage.setItem(DEADLINES_CACHE_TIME_KEY, Date.now().toString());
-          } else {
-            // setDeadlines([]); // This line was removed
           }
         } catch (err) {
-          // setDeadlinesError('Failed to load deadlines. Please try again later.'); // This line was removed
-        } finally {
-          // setDeadlinesLoading(false); // This line was removed
+          console.error('Failed to load deadlines:', err);
         }
       };
       fetchAndParseDeadlines();
