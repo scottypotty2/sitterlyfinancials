@@ -1,9 +1,19 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import type { FormEvent } from 'react'
 
 export default function ContactSection() {
   const [showPopup, setShowPopup] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  // Google Analytics page view tracking
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('config', 'G-ZBZ0ZEECM3', {
+        page_title: 'Contact',
+        page_location: window.location.href,
+      });
+    }
+  }, []);
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()

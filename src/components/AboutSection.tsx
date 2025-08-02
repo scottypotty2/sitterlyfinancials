@@ -1,4 +1,16 @@
+import { useEffect } from 'react'
+
 export default function AboutSection() {
+  // Google Analytics page view tracking
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('config', 'G-ZBZ0ZEECM3', {
+        page_title: 'About',
+        page_location: window.location.href,
+      });
+    }
+  }, []);
+
   return (
     <>
       <section className="py-16 px-4 flex flex-col items-center relative overflow-hidden min-h-screen" id="about">

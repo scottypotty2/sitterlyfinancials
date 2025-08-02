@@ -71,6 +71,16 @@ export default function HomeSection() {
   const [error, setError] = useState<string | null>(null)
   const [csvDeadlines] = useState(parseCSVDeadlines());
 
+  // Google Analytics page view tracking
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.gtag) {
+      window.gtag('config', 'G-ZBZ0ZEECM3', {
+        page_title: 'Home',
+        page_location: window.location.href,
+      });
+    }
+  }, []);
+
   useEffect(() => {
     if (open === 0 && news.length === 0 && !loading) {
       setLoading(true)
@@ -90,7 +100,7 @@ export default function HomeSection() {
   }, [open, news.length, loading])
 
   useEffect(() => {
-    if (open === 1 && !deadlinesLoading) {
+    if (open === 1) {
       const cached = localStorage.getItem(DEADLINES_CACHE_KEY);
       const cacheTime = localStorage.getItem(DEADLINES_CACHE_TIME_KEY);
       if (cached && cacheTime && !shouldRefreshDeadlinesCache()) {
@@ -138,7 +148,7 @@ export default function HomeSection() {
       };
       fetchAndParseDeadlines();
     }
-  }, [open, deadlinesLoading])
+  }, [open])
 
   return (
     <div className="flex flex-col min-h-screen w-full relative overflow-hidden">
