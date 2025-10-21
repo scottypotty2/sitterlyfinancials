@@ -7,6 +7,9 @@ const ONE_WEEK_MS = 7 * 24 * 60 * 60 * 1000;
 const CALENDAR_ID = 'ki7a5mepsngkcq91r7lua22blno93na9@import.calendar.google.com';
 const API_KEY = import.meta.env.VITE_GOOGLE_CALENDAR_API_KEY;
 
+// Debug: Log Google Calendar API key
+console.log('Google Calendar API Key:', API_KEY);
+
 function shouldRefreshDeadlinesCache() {
   const lastFetch = localStorage.getItem(DEADLINES_CACHE_TIME_KEY);
   if (!lastFetch) return true;
@@ -91,6 +94,14 @@ export default function HomeSection() {
       setLoading(true)
       setError(null)
       const apiKey = import.meta.env.VITE_NEWSAPI_KEY
+      
+      // Debug: Log environment variables
+      console.log('Environment check:', {
+        VITE_NEWSAPI_KEY: import.meta.env.VITE_NEWSAPI_KEY,
+        VITE_GOOGLE_CALENDAR_API_KEY: import.meta.env.VITE_GOOGLE_CALENDAR_API_KEY,
+        NODE_ENV: import.meta.env.NODE_ENV,
+        MODE: import.meta.env.MODE
+      })
       
       // Check if API key exists
       if (!apiKey) {
