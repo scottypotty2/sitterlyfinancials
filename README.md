@@ -1,4 +1,5 @@
-Welcome to your new TanStack app! 
+Welcome to your new TanStack app!
+<!-- Trigger redeploy with environment variables --> 
 
 # Getting Started
 
