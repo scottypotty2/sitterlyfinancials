@@ -1,5 +1,11 @@
+import EnvTest from './components/EnvTest'
+
 function App() {
-  return <></>
+  return (
+    <>
+      <EnvTest />
+    </>
+  )
 }
 
 export default App
