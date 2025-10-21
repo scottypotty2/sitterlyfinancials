@@ -16,6 +16,8 @@ import Header from './components/Header'
 import HomeSection from './components/HomeSection'
 import AccountingSection from './components/AccountingSection'
 import MarketingSection from './components/MarketingSection'
+import WebDevelopmentSection from './components/WebDevelopmentSection'
+import ConsultationSection from './components/ConsultationSection'
 import AboutSection from './components/AboutSection'
 import ContactSection from './components/ContactSection'
 
@@ -44,6 +46,16 @@ const marketingRoute = createRoute({
   path: '/marketing',
   component: MarketingSection,
 })
+const webDevelopmentRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/webdevelopment',
+  component: WebDevelopmentSection,
+})
+const consultationRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/consultation',
+  component: ConsultationSection,
+})
 const aboutRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/about',
@@ -59,6 +71,8 @@ const routeTree = rootRoute.addChildren([
   homeRoute,
   accountingRoute,
   marketingRoute,
+  webDevelopmentRoute,
+  consultationRoute,
   aboutRoute,
   contactRoute,
 ])

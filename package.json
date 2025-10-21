@@ -10,7 +10,10 @@
     "test": "vitest run",
     "lint": "eslint",
     "format": "prettier",
-    "check": "prettier --write . && eslint --fix"
+    "check": "prettier --write . && eslint --fix",
+    "now": "npm run kill-ports && npm run wait && npm run start",
+    "kill-ports": "npx kill-port 3000 5000 || echo 'No processes found on ports 3000/5000'",
+    "wait": "ping 127.0.0.1 -n 3 > nul"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.0.6",
@@ -29,6 +32,7 @@
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
     "jsdom": "^26.0.0",
+    "kill-port": "^2.0.1",
     "prettier": "^3.5.3",
     "typescript": "^5.7.2",
     "vite": "^6.1.0",
